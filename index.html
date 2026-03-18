@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat Schedule Planner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- SECTION: App Shell -->
+  <div class="app-shell gradient-mesh grain">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark">⏱️</span>
+        <div class="brand-text">
+          <h1 class="brand-title">TempoChat Planner</h1>
+          <p class="brand-subtitle">Manage your day by talking to your schedule.</p>
+        </div>
+      </div>
+      <div class="header-help">
+        <div class="accent-line"></div>
+        <p class="header-hint">Try: <span class="hint-pill">“Add focus time tomorrow 2–4pm”</span> <span class="hint-pill">“What’s on today?”</span> <span class="hint-pill">“Find 1h for workout this week”</span></p>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- SECTION: Chat Panel -->
+      <section class="panel chat-panel shadow-soft" aria-label="Chat-based planner">
+        <div class="panel-header">
+          <h2>Chat</h2>
+          <span class="panel-badge">Assistant</span>
+        </div>
+
+        <div class="chat-window" id="chat-window" aria-live="polite">
+          <div class="message bot-message">
+            <div class="message-avatar">🤖</div>
+            <div class="message-bubble">
+              <p>Hi! I’m your schedule assistant. Tell me what you’d like to plan.</p>
+              <ul class="message-list">
+                <li><span class="chip">Add</span> “Lunch with Sam tomorrow at 1pm”</li>
+                <li><span class="chip">View</span> “What’s on my calendar today?”</li>
+                <li><span class="chip">Suggest</span> “Find 45 minutes for reading this afternoon”</li>
+                <li><span class="chip">Move</span> “Move my 3pm meeting to Friday at 10am”</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <form class="chat-input-row" id="chat-form">
+          <label class="visually-hidden" for="chat-input">Type a message to manage your schedule</label>
+          <input
+            id="chat-input"
+            class="chat-input"
+            type="text"
+            autocomplete="off"
+            placeholder="Ask me to add, move, or find time for something..."
+            required
+          />
+          <button type="submit" class="primary-button">Send</button>
+        </form>
+
+        <div class="quick-commands" aria-label="Quick command shortcuts">
+          <button type="button" class="pill-button" data-command="What’s on my schedule today?">Today</button>
+          <button type="button" class="pill-button" data-command="Show me this week">This week</button>
+          <button type="button" class="pill-button" data-command="Find 1 hour for deep work tomorrow">Find time</button>
+          <button type="button" class="pill-button" data-command="Help">Help</button>
+        </div>
+      </section>
+
+      <!-- SECTION: Schedule Panel -->
+      <section class="panel schedule-panel shadow-soft" aria-label="Schedule grid view">
+        <div class="panel-header">
+          <h2>Schedule</h2>
+          <div class="view-toggle" role="group" aria-label="Schedule view">
+            <button type="button" class="toggle-button is-active" data-view="day">Day</button>
+            <button type="button" class="toggle-button" data-view="week">Week</button>
+          </div>
+        </div>
+
+        <div class="schedule-meta">
+          <div class="schedule-date" id="schedule-range"></div>
+          <div class="legend">
+            <span class="legend-item"><span class="legend-dot legend-event"></span> Event</span>
+            <span class="legend-item"><span class="legend-dot legend-suggestion"></span> Suggested slot</span>
+          </div>
+        </div>
+
+        <!-- Day View Grid -->
+        <div class="grid-wrapper" id="day-view" aria-label="Day schedule grid">
+          <div class="time-column" id="day-times"></div>
+          <div class="day-column" id="day-column">
+            <div class="day-background-grid" id="day-background-grid"></div>
+            <div class="events-layer" id="day-events"></div>
+          </div>
+        </div>
+
+        <!-- Week View Grid -->
+        <div class="grid-wrapper is-hidden" id="week-view" aria-label="Week schedule grid">
+          <div class="time-column" id="week-times"></div>
+          <div class="week-columns" id="week-columns">
+            <!-- JS will render 7 day columns here -->
+          </div>
+        </div>
+
+        <div class="panel-footer">
+          <p class="footer-hint">All times are based on your local time. Use natural phrases like "tomorrow morning" or "next Monday at 9".</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
